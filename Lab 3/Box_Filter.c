@@ -63,7 +63,6 @@ int main()
                 }
             }
 
-            // Set the final value as the average of the window
             final[i][j] = sum / count;
         }
     }

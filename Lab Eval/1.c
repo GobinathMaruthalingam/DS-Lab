@@ -1,35 +1,71 @@
 #include <stdio.h>
 
-void mSelectionsort(int arr[], int n) {
-    int i, j, min_idx, temp;
+void selectionSort(int arr[], int n)
+{
+    for (int i = 0; i < n / 2; i++)
+    {
+        int minIdx = i;
+        int maxIdx = i;
 
-    for (i = 0; i < n-1; i++) {
-        min_idx = i;
-        for (j = i+1; j < n; j++)
-            if (arr[j] < arr[min_idx])
-                min_idx = j;
+        for (int j = i + 1; j < n - i; j++)
+        {
+            if (arr[j] < arr[minIdx])
+            {
+                minIdx = j;
+            }
+            if (arr[j] > arr[maxIdx])
+            {
+                maxIdx = j;
+            }
+        }
 
-        temp = arr[min_idx];
-        arr[min_idx] = arr[i];
-        arr[i] = temp;
+        if (minIdx != i)
+        {
+            int temp = arr[i];
+            arr[i] = arr[minIdx];
+            arr[minIdx] = temp;
+        }
+
+        if (maxIdx != n - i - 1)
+        {
+            int temp = arr[n - i - 1];
+            arr[n - i - 1] = arr[maxIdx];
+            arr[maxIdx] = temp;
+        }
     }
-    temp= arr[n-1];
-    arr[n-1] = arr[0];
-    arr[0] = temp;
 }
 
-void printArray(int arr[], int size) {
-    int i;
-    for (i = 0; i < size; i++)
+void printArray(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
         printf("%d ", arr[i]);
+    }
     printf("\n");
 }
 
-int main() {
-    int arr[] = {64, 25, 12, 22, 11};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    mSelectionsort(arr, n);
-    printf("Sorted array: \n");
+int main()
+{
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter the elements of the array:\n");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nOriginal array:\n");
     printArray(arr, n);
+
+    selectionSort(arr, n);
+
+    printf("\nSorted array:\n");
+    printArray(arr, n);
+
     return 0;
 }

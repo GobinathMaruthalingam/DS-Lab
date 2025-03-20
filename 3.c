@@ -1,12 +1,12 @@
 // 3) Implement stack using doubly LL.
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct Node {
     int data;
     struct Node* next;
+    struct Node* prev;
 } Node;
 
 Node* createNode(int data) {
@@ -17,18 +17,24 @@ Node* createNode(int data) {
     }
     nNode->data = data;
     nNode->next = NULL;
+    nNode->prev = NULL;
     return nNode;
-}
-
-void push(Node** top, int data) {
-    Node* nNode = createNode(data);
-    nNode->next = *top;
-    *top = nNode;
-    printf("%d pushed to stack\n", data);
 }
 
 int isEmpty(Node* top) {
     return (top == NULL);
+}
+
+void push(Node** top, int data) {
+    Node* nNode = createNode(data);
+    if (*top == NULL) {
+        *top = nNode;
+    } else {
+        nNode->next = *top;
+        (*top)->prev = nNode;
+        *top = nNode;
+    }
+    printf("%d pushed to stack\n", data);
 }
 
 int pop(Node** top) {
@@ -37,8 +43,10 @@ int pop(Node** top) {
         return -1;  
     }
     Node* temp = *top;
-    *top = (*top)->next;
     int popped = temp->data;
+    *top = (*top)->next;
+    if (*top != NULL)
+        (*top)->prev = NULL;
     free(temp);
     return popped;
 }
@@ -51,7 +59,7 @@ int peek(Node* top) {
     return top->data;
 }
 
-void display(Node* top) {
+void disp(Node* top) {
     if (isEmpty(top)) {
         printf("Stack is empty\n");
         return;
@@ -61,7 +69,7 @@ void display(Node* top) {
         printf("%d -> ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\n");  
+    printf("NULL\n"); 
 }
 
 int main() {
@@ -74,14 +82,14 @@ int main() {
     printf("Top element is %d\n", peek(stack));
 
     printf("Stack elements are:\n");
-    display(stack);
+    disp(stack);
 
-    int poppedValue = pop(&stack);
-    if (poppedValue != -1)
-        printf("%d popped from stack\n", poppedValue);
+    int poppedVal = pop(&stack);
+    if (poppedVal != -1)
+        printf("%d popped from stack\n", poppedVal);
 
     printf("Stack elements after pop:\n");
-    display(stack);
+    disp(stack);
 
     return 0;
 }

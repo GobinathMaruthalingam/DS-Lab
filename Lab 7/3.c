@@ -20,7 +20,6 @@ Node* createNode(int data) {
     nNode->prev = NULL;
     return nNode;
 }
-
 int isEmpty(Node* top) {
     return (top == NULL);
 }

@@ -1,4 +1,4 @@
-// Program to Implement a Dynamic Queue using Linked List
+// Program to Implement a Dynamic Queue(using Linked List).
 
 #include <stdio.h>
 #include <stdlib.h>

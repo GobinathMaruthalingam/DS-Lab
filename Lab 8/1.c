@@ -1,4 +1,4 @@
-// Queue Ops
+// Basic Queue Ops
 
 #include <stdio.h>
 #define SIZE 5

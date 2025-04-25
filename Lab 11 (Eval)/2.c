@@ -72,3 +72,12 @@ int main() {
 
     return 0;
 }
+
+/*
+Output:
+Enter number of nodes: 6
+Enter node values:
+9 7 6 4 2 5
+Enter target sum: 12
+Pair found: 5 + 7 = 12
+*/
